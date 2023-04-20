@@ -8,14 +8,19 @@ app.listen(8080, () => {
 
 
 let tarefa = [];
+let tarefa_Id = 0;
 
 app.post('/novaTarefa', (req, res) => {
     const { titulo, descricao } = req.body;
     if (!titulo) {
         return res.status(400).send('ERRO, TÍTULO OBRIGATÓRIO!');
     }
+    tarefa_Id += 999
+    if(tarefa_Id > 999){
+        return res.status(403).send('ATENÇÃO! VOCÊ POSSUÍ MAIS DE 999 TAREFAS, EXCLUA ALGUMAS');
+    }
     const novaTarefa = {
-        id: tarefa.length + 1,
+        id: tarefa_Id,
         titulo: titulo,
         descricao: descricao,
         concluida: false
