@@ -26,12 +26,12 @@ app.post('/novaTarefa', (req, res) => {
         concluida: false
     }
     tarefas.push(novaTarefa);
-    let print = `<h1> CRIADA TAREFA: " ${titulo} " COM ID: " ${novaTarefa.id} " </h1>`;
-    print += `<h1> DESCRIÇÃO: " ${descricao} " </h1>`;
+    let print = `CRIADA TAREFA: " ${titulo} " COM ID: " ${novaTarefa.id} " | `;
+    print += `DESCRIÇÃO: " ${descricao} " | `;
     if (novaTarefa.concluida === false){
-        print += `<h1> TAREFA PENDENTE </h1>`;
+        print += `TAREFA PENDENTE `;
     } else {
-        print += `<h1> TAREFA CONCLUIDA </h1>`;
+        print += `TAREFA CONCLUIDA `;
     }
     res.send(print);
 })
@@ -64,6 +64,20 @@ app.put('/atualizarTarefa', (req, res) => {
     }
     atualizarTarefa.titulo = titulo;
     atualizarTarefa.descricao = descricao;
-    res.send(`<h1> TAREFA ATUALIZADA COM SUCESSO! </h1>`);
+    res.send(`TAREFA ATUALIZADA COM SUCESSO!`);
     console.log(tarefas);
+});
+
+app.get('/pegaTarefas', (req, res) => {
+    const tarefasString = JSON.stringify(tarefas, null, 2);
+    const printHTML = `ESTAS SÃO TODAS AS SUAS TAREFAS: <pre>${tarefasString}</pre>`;
+    res.send(printHTML);
+})
+
+app.get('/pegaTarefa', (req, res) => {
+    const { id } = req.body;
+    const pegarTarefa = tarefas.find(callbackTarefa => callbackTarefa.id === id);
+    const tarefaString = JSON.stringify(pegarTarefa, null, 2);
+    const printHTML = `ESTA É A TAREFA REQUISITADA: <pre>${tarefaString}</pre>`;
+    res.send(printHTML);
 });
