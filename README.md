@@ -1,4 +1,4 @@
-// Program uses .gitignore to ignore nodemon modules
+   Program uses .gitignore to ignore nodemon modules
    Necessary installation through the terminal using `npm i express nodemon`.
 
    Program created for evaluative requirements of FATEC Thomaz Novelino faculty.
